@@ -66,10 +66,14 @@ class SearchViewModel : CommonViewModel2() {
                     _canNextPageLoaded = false
                 }
                 if (searchType == C.TYPE_SEARCH_NEW) {
-                    _searchList.value = list
+                    val updatedList = list
+                    updatedList?.sortByDescending { it.releasedDate }
+//                    _searchList.value = list
+                    _searchList.value = updatedList
                 } else if (searchType == C.TYPE_SEARCH_UPDATE) {
                     val updatedList = _searchList.value
                     updatedList?.addAll(list)
+                    updatedList?.sortByDescending { it.releasedDate }
                     _searchList.value = updatedList
                 }
                 pageNumber++
